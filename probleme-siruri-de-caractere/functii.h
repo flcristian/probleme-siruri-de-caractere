@@ -27,6 +27,19 @@ bool esteConsoana(char a) {
 	return 0;
 }
 
+bool contineDoarConsoaneSauI(char s[]) {
+	char x[4] = { 'a','e','o','u' };
+	for (int i = 0; i < strlen(s); i++) {
+		char c = s[i];
+		for (int j = 0; j < 4; j++) {
+			if (c == x[j]) {
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+
 // Modifiers
 
 void FNume(char s[], char id[]) {
@@ -64,5 +77,23 @@ void split(char s[], char cuvinte[200][200], int& d) {
 		strcpy(cuvinte[d], a);
 		d++;
 		a = strtok(NULL, " .,;!?");
+	}
+}
+
+void formareAcronim(char sir[], char acronim[]) {
+	char s[500] = "";
+	char r[3] = "";
+	strcpy(s, sir);
+
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+
+	for (int i = 0; i < d; i++) {
+		char litera = cuvinte[i][0];
+		if (litera > 64 && litera < 91) {
+			r[0] = litera;
+			strcat(acronim, r);
+		}
 	}
 }

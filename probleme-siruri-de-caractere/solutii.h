@@ -8,6 +8,7 @@
 
 void problema1() {
 	char s[50] = "";
+	cout << "Introduceti sirul :\n";
 	cin.getline(s, 50);
 	char id[50] = "";
 	FNume(s, id);
@@ -19,6 +20,7 @@ void problema1() {
 
 void problema2() {
 	char s[255] = "";
+	cout << "Introduceti sirul :\n";
 	cin.getline(s, 255);
 
 	int count = 0;
@@ -36,6 +38,7 @@ void problema2() {
 
 void problema3() {
 	char s[255] = "";
+	cout << "Introduceti sirul :\n";
 	cin.getline(s, 255);
 
 	for (int i = 0; i < strlen(s); i++) {
@@ -54,6 +57,7 @@ void problema3() {
 
 void problema4() {
 	char s[255] = "";
+	cout << "Introduceti propozitia :\n";
 	cin.getline(s, 255);
 	char cuvinte[200][200];
 	int d;
@@ -84,4 +88,44 @@ void problema5() {
 		lastLetter5(cuvinte[i]);
 		cout << cuvinte[i] << " ";
 	}
+}
+
+// Problema 6
+// Se consideră un cuvânt format din cel puțin două și cel mult 100 de caractere, 
+// numai litere mici ale alfabetului englez.
+// Scrieţi un program care citeşte de la tastatură un cuvânt de tipul precizat și 
+// afișează pe ecran mesajul DA în cazul în care cuvântul conține doar consoane şi, 
+// eventual, vocala i, sau mesajul NU în caz contrar.
+
+void problema6() {
+	char cuvant[200] = "";
+	cout << "Introduceti cuvantul :\n";
+	cin.getline(cuvant, 200);
+
+	if (contineDoarConsoaneSauI(cuvant)) {
+		cout << "DA";
+	}
+	else {
+		cout << "NU";
+	}
+	
+}
+
+// Problema 7
+// Se consideră un text cu cel mult 100 de caractere, în care cuvintele sunt formate numai 
+// din litere mari și mici ale alfabetului englez și sunt separate prin câte un spațiu. 
+// Textul reprezintă numele unei instituții sau al unei organizații.
+// Scrieți un program care citește de la tastatură un text de tipul precizat și construiește în 
+// memorie, apoi afișează pe ecran, un șir de caractere ce reprezintă acronimul corespunzător 
+// numelui citit. Acronimul este format din primul caracter al fiecărui cuvânt al numelui care 
+// începe cu majusculă.
+
+void problema7() {
+	char s[100] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 100);
+
+	char acronim[100] = "";
+	formareAcronim(s, acronim);
+	cout << acronim;
 }
