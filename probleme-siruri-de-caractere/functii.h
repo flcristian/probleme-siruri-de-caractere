@@ -48,6 +48,10 @@ void firstLastLetterUppercase(char s[]) {
 	}
 }
 
+void lastLetter5(char s[]) {
+	s[strlen(s) - 1] = '5';
+}
+
 // Utility
 
 void split(char s[], char cuvinte[200][200], int& d) {
@@ -55,10 +59,10 @@ void split(char s[], char cuvinte[200][200], int& d) {
 	strcpy(sir, s);
 	d = 0;
 	char* a;
-	a = strtok(sir, " ");
+	a = strtok(sir, " .,;!?");
 	while (a != NULL) {
 		strcpy(cuvinte[d], a);
 		d++;
-		a = strtok(NULL, " ");
+		a = strtok(NULL, " .,;!?");
 	}
 }

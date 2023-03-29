@@ -66,4 +66,22 @@ void problema4() {
 }
 
 // Problema 5
-//
+// Se consideră fișierul prosir.in care conține pe primul rând un text format 
+// din cel mult 200 de caractere litere mici și spații. Cuvintele din text sunt 
+// separate prin unul sau mai multe spații. Să se modifice textul citit din 
+// fișier prin înlocuirea ultimei litere a fiecărui cuvânt cu cifra 5.
+
+void problema5() {
+	ifstream f("input.txt");
+	char s[200] = "";
+	f.getline(s, 200);
+	f.close();
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+
+	for (int i = 0; i < d; i++) {
+		lastLetter5(cuvinte[i]);
+		cout << cuvinte[i] << " ";
+	}
+}
