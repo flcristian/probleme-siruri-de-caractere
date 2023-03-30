@@ -1,2 +1,7 @@
 ﻿  probleme-siruri-de-caractere.cpp
+D:\mycode\probleme-siruri-de-caractere\probleme-siruri-de-caractere\functii.h(45,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\mycode\probleme-siruri-de-caractere\probleme-siruri-de-caractere\functii.h(51,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\mycode\probleme-siruri-de-caractere\probleme-siruri-de-caractere\functii.h(119,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\mycode\probleme-siruri-de-caractere\probleme-siruri-de-caractere\functii.h(151,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\mycode\probleme-siruri-de-caractere\probleme-siruri-de-caractere\functii.h(160,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   probleme-siruri-de-caractere.vcxproj -> D:\mycode\probleme-siruri-de-caractere\x64\Debug\probleme-siruri-de-caractere.exe
