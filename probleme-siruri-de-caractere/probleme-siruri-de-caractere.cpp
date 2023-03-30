@@ -1,6 +1,7 @@
 #include "solutii.h"
 
-int main()
-{
-    problema4();
+using namespace std;
+
+int main() {
+	problema24();
 }
