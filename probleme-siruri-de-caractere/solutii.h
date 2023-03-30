@@ -420,3 +420,99 @@ void problema24() {
 }
 
 // Problema 25
+// Caracterul mediu a două sau al mai multor caractere este caracterul care are codul 
+// ASCII egal cu partea întreagă a mediei aritmetice a codurilor ASCII ale caracterelor date.
+// Un caracter se numeste bun daca nu este spatiu, nu este litera mare si nu este vocala.
+
+void problema25() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+
+	int medie = medieCoduriAscii(s);
+	cout << "Caracterul mediu bun este : " << (char)medie;
+}
+
+// Problema 26
+// Se dă un şir de caractere ce conţine cuvinte formate din litere mici ale alfabetului englez, 
+// separate prin unul sau mai multe spații.
+// Să se afişeze şirul obţinut după eliminarea din șir unor spații, astfel încât între cuvinte 
+// să fie un singur spațiu și să nu nu existe spații înainte de primul cuvânt și nici după ultimul.
+
+void problema26() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+
+	removeSpaces(s);
+	cout << s;
+}
+
+// Problema 27
+// Se citește un șir format din cel mult 255 caractere, litere mici ale alfabetului englez. 
+// Să se determine ce mai lungă secvență din șir formată numai din consoane.
+
+void problema27() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+
+	char secventa[255] = "";
+	maxSecventaConsoane(s, secventa);
+	cout << secventa;
+}
+
+// Problema 28
+// Se dă un şir de caractere ce conţine cuvinte formate din litere mici ale alfabetului englez, separate 
+// prin unul sau mai multe spații. Înaintea primului cuvânt nu există spații, și nici după ultimul. 
+// Să se modifice șirul dat, astfel încât să se înlocuiască fiecare cuvânt cu exact trei litere din șir
+// cu simbolul *.
+
+void problema28() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+
+	swapCuvinte3LitereCuSteluta(s);
+	cout << s;
+}
+
+// Problema 29
+// Se dă un șir de caractere care conține cuvinte formate din litere mici ale alfabetului englez și 
+// separate printr-un singur spațiu. Să se determine cel mai lung cuvânt care are toate literele 
+// distincte. Dacă nu există niciun cuvânt cu toate literele distincte se va afișa -1.
+
+void problema29() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+	
+	int r = cuvantMaxLitereDistincte(cuvinte, d);
+	if (r == -1) {
+		cout << r;
+	}
+	else {
+		cout << cuvinte[r];
+	}
+}
+
+// Problema 30
+// Se dă un număr natural l și un șir de cel mult 10000 de caractere ce conține cuvinte separate prin câte 
+// un spațiu. Fiecare cuvânt din șir este format din cel mult l litere mari ale alfabetului englez.
+// Să se scrie un program care afișează cuvintele din text, în ordine, pe linii de cel mult l caractere, 
+// astfel încât orice linie începe și se termină cu un cuvânt și oricare două cuvinte de pe aceeași linie 
+// sunt separate printr-un singur spațiu.Fiecare linie va fi folosită la maxim, adică dacă un cuvânt are 
+// loc pe acea linie va fi pus acolo și nu va fi trecut pe linia următoare sau despărțit în silabe.
+
+void problema30() {
+	ifstream f("input.txt");
+	char s[255] = "", lt[10] = "";
+	f.getline(lt, 10);
+	f.getline(s, 255);
+	int l = atoi(lt);
+
+	rezolvarePb30(s, l);
+}

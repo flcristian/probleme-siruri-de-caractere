@@ -83,6 +83,34 @@ bool suntAnagrame(char cuv1[], char cuv2[]) {
 	return 1;
 }
 
+bool esteCaracterBun(char c) {
+	if (esteVocala(c)) {
+		return 0;
+	}
+	if (c > 64 && c < 91) {
+		return 0;
+	}
+	if (c == ' ') {
+		return 0;
+	}
+	return 1;
+}
+
+bool toateLitereleDistincte(char cuvant[]) {
+	int f[26]{};
+	_strlwr(cuvant);
+	for (int i = 0; i < strlen(cuvant); i++) {
+		f[cuvant[i] - 97]++;
+	}
+
+	for (int i = 0; i < 26; i++) {
+		if (f[i] > 1) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int apare(char cuvinte[200][200], int d, char cuvant[]) {
 	for (int i = 0; i < d; i++) {
 		if (strcmp(cuvinte[i], cuvant) == 0) {
@@ -250,6 +278,61 @@ void bubbleSortCuFrecventa(char cuvinte[200][200], int d, int f[]) {
 	} while (flag == false);
 }
 
+int medieCoduriAscii(char s[]) {
+	int suma = 0, c = 0;
+	for (int i = 0; i < strlen(s); i++) {
+		if (esteCaracterBun(s[i])) {
+			suma += s[i];
+			c++;
+		}
+	}
+	return (suma / c);
+}
+
+void maxSecventaConsoane(char s[], char secventa[]) {
+	int max = 0, maxR = -1, c = 0, r = -1;
+	for (int i = 0; i < strlen(s); i++) {
+		if (esteConsoana(s[i])) {
+			c++;
+			if (r == -1) {
+				r = i;
+			}
+			if (c > max) {
+				max = c;
+				maxR = r;
+			}
+		}
+		else {
+			c = 0;
+			r = -1;
+		}
+	}
+	char seg[255] = "";
+	strncpy(secventa, s + maxR, max);
+}
+
+int cuvantMaxLitereDistincte(char cuvinte[200][200], int d) {
+	int max = 0, r = -1;
+	for (int i = 0; i < d; i++) {
+		if (toateLitereleDistincte(cuvinte[i])) {
+			if (strlen(cuvinte[i]) > max) {
+				max = strlen(cuvinte[i]);
+				r = i;
+			}
+		}
+	}
+	return r;
+}
+
+int limitaLiniePentruPb30(char cuvinte[200][200], int i, int d, int l) {
+	int suma = 0;
+	while (suma + strlen(cuvinte[i]) - 1 < l && i < d) {
+		suma += strlen(cuvinte[i]) + 1;
+		i++;
+	}
+	return i;
+}
+
 // Modifiers
 
 void inserare(char sir[], int k, char c) {
@@ -350,7 +433,39 @@ int countVocaleConsecutive(char s[]) {
 	return c;
 }
 
-// Rezolvari
+void removeSpaces(char s[]) {
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+	strcpy(s, "");
+	char space[3] = " ";
+	for (int i = 0; i < d; i++) {
+		strcat(s, cuvinte[i]);
+		if (i != d - 1) {
+			strcat(s, space);
+		}	
+	}
+}
+
+void swapCuvinte3LitereCuSteluta(char s[]) {
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+	
+	char spatiu[3] = " ";
+	strcpy(s, "");
+	for (int i = 0; i < d; i++) {
+		if (strlen(cuvinte[i]) == 3) {
+			strcpy(cuvinte[i], "*");
+		}
+		strcat(s, cuvinte[i]);
+		if (i != d - 1) {
+			strcat(s, spatiu);
+		}
+	}
+}
+
+// Uncategorized (rezolvari)
 
 void rezolvarePb15(char prop[255][255], int d) {
 	int f[255]{};
@@ -420,6 +535,18 @@ void rezolvarePb24(char cuvinte[200][200], int d) {
 	}
 }
 
-// ? ? ? ? ? ? ? ? ? ^^^^^^
+// ? ? ? ? ? ? ? ? ?
 
-
+void rezolvarePb30(char s[], int l) {
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+	for (int i = 0; i < d; i++) {
+		int k = limitaLiniePentruPb30(cuvinte, i, d, l);
+		for (int j = i; j < k; j++) {
+			cout << cuvinte[j] << " ";
+		}
+		cout << endl;
+		i = k - 1;
+	}
+}

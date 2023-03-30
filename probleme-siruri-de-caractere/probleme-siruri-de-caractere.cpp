@@ -3,5 +3,5 @@
 using namespace std;
 
 int main() {
-	problema24();
+	problema30();
 }
