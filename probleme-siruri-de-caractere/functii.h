@@ -117,7 +117,7 @@ int apare(char cuvinte[200][200], int d, char cuvant[]) {
 			return i;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 // Utility
@@ -517,11 +517,10 @@ void rezolvarePb24(char cuvinte[200][200], int d) {
 
 	for (int i = 0; i < d; i++) {
 		int k = apare(cuvinteUnice, n, cuvinte[i]);
-		if (k != 0) {
+		if (k != -1) {
 			f[k]++;
 		}
 		else {
-			cout << cuvinte[i] << endl;
 			strcpy(cuvinteUnice[n], cuvinte[i]);
 			f[n]++;
 			n++;
@@ -534,8 +533,6 @@ void rezolvarePb24(char cuvinte[200][200], int d) {
 		cout << cuvinteUnice[i] << " " << f[i] << endl;
 	}
 }
-
-// ? ? ? ? ? ? ? ? ?
 
 void rezolvarePb30(char s[], int l) {
 	char cuvinte[200][200];
