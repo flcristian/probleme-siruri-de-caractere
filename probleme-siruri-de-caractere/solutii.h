@@ -246,5 +246,177 @@ void problema14() {
 // propoziție alcătuită din litere mici ale alfabetului englez și spații.
 
 void problema15() {
-
+	ifstream f("input.txt");
+	char prop[255][255], dt[10];
+	int d;
+	f.getline(dt, 10);
+	d = atoi(dt);
+	for (int i = 0; i < d; i++) {
+		f.getline(prop[i], 255);
+	}
+	
+	rezolvarePb15(prop, d);
 }
+
+// Problema 16
+// Să se scrie un program care citeşte un şir de caractere format 
+// din litere mici ale alfabetului englez şi elimină din șir toate vocalele.
+
+void problema16() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+	stergereVocale(s);
+
+	cout << s;
+}
+
+// Problema 17
+// Determinați numărul de perechi de vocale consecutive din propoziție.
+
+void problema17() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+
+	cout << "Numarul de perechi de vocale consecutive este : " << countVocaleConsecutive(s);
+}
+
+// Problema 18
+// Să se scrie un program care verifică dacă două cuvinte date sunt anagrame.
+
+void problema18() {
+	char cuv1[200] = "", cuv2[200] = "";
+	cout << "Introduceti primul cuvant :\n";
+	cin.getline(cuv1, 200);
+	cout << "Introduceti al doilea cuvant :\n";
+	cin.getline(cuv2, 200);
+
+	string raspuns = "Cuvintele";
+	if (suntAnagrame(cuv1, cuv2)) {
+		raspuns += " sunt ";
+	}
+	else {
+		raspuns += " nu sunt ";
+	}
+	raspuns += "anagrame.";
+	cout << raspuns;
+}
+
+// Problema 19
+// Scrieți un program care citește de la tastatură două șiruri formate fiecare din cel mult 20 de caractere. 
+// Primul șir reprezintă numele unei persoane, iar al doilea șir reprezintă prenumele aceleiași persoane. 
+// Atât numele, cât și prenumele sunt formate doar din litere ale alfabetului englez și fiecare conține 
+// cel puțin o consoană.
+// Programul construiește în memorie și afișează pe ecran un al treilea șir de caractere, care va conține 
+// consoanele din prenumele citit dispuse în ordinea în care apar în prenume, urmate de exact un spațiu și de
+// numele citit.
+
+void problema19() {
+	char nume[20] = "", prenume[20] = "";
+	cout << "Introduceti numele : ";
+	cin.getline(nume, 20);
+	cout << "Introduceti prenumele : ";
+	cin.getline(prenume, 20);
+	char rezultat[40] = "";
+	rezolvarePb19(nume, prenume, rezultat);
+	cout << rezultat;
+}
+
+// Problema 20
+// Scrieți un program care citește de tastatură două șiruri de cel mult 30 caractere de aceeași lungime 
+// care conțin doar litere mici ale alfabetului englez și construiește în memorie și apoi afișează pe ecran 
+// un cel mai bun șablon comun al lor, adică șablonul comun cu număr minim de caractere ?.
+// Un șir de caractere s este șablon pentru un șir de caractere x dacă are aceeași lungime cu x și este alcătuit 
+// numai din caractere ale mulțimii {*,#,?}, iar pe fiecare poziție din s în care apare * în x apare vocală, pe 
+// fiecare poziție din s în care apare # în x apare consoană, iar pe fiecare poziție din s în care apare ? în x 
+// putem avea orice caracter.
+
+void problema20() {
+	char cuv1[200] = "", cuv2[200] = "";
+	cout << "Introduceti primul cuvant :\n";
+	cin.getline(cuv1, 200);
+	cout << "Introduceti al doilea cuvant :\n";
+	cin.getline(cuv2, 200);
+	char sablon[200] = "";
+	sablonDouaCuvinte(cuv1, cuv2, sablon);
+	cout << "Cel mai bun sablon este : " << sablon;
+}
+
+// Problema 21
+// Să se scrie un program care citește un șir de caractere 
+// și afișează litera mică cel mai des întâlnită în șir.
+
+void problema21() {
+	char cuvant[200] = "";
+	cout << "Introduceti cuvantul :\n";
+	cin.getline(cuvant, 200);
+	int f[26]{};
+	frecventaLitere(cuvant, f);
+	int max = 0, r = 0;
+	for (int i = 0; i < 26; i++) {
+		if (f[i] > max) {
+			max = f[i];
+			r = i;
+		}
+	}
+	char raspuns = 97 + r;
+	cout << "Litera cu cea mai mare frecventa este : " << raspuns;
+}
+
+// Problema 22
+// Scrieţi un program care citeşte de la tastatură un şir de cel mult 60 de caractere 
+// (litere mici şi mari ale alfabetului englez, cifre, puncte, virgule şi spaţii) şi afişează pe 
+// ecran cifra care apare de cele mai multe ori în şirul citit.
+
+void problema22() {
+	char sir[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(sir, 255);
+	int f[10]{};
+	frecventaCifre(sir, f);
+	int max = 0, r = 0;
+	for (int i = 0; i < 10; i++) {
+		if (f[i] > max) {
+			max = f[i];
+			r = i;
+		}
+	}
+	cout << "Cifra cu cea mai mare frecventa este : " << r;
+}
+
+// Problema 23
+// Să se determine numărul cuvintelor care conțin doar vocale.
+
+// Text in "input.txt" ! ! !
+
+void problema23() {
+	ifstream f("input.txt");
+	char cuvinte[200][200], dt[10] = "";
+	int d;
+	f.getline(dt, 10);
+	d = atoi(dt);
+	for (int i = 0; i < d; i++) {
+		f.getline(cuvinte[i], 200);
+	}
+	
+	rezolvarePb23(cuvinte, d);
+}
+
+// Problema 24
+// Se dă un șir de caractere care conține litere mici și mari ale alfabetului englez, 
+// spații și semne de punctuație. Să se afișeze fiecare cuvânt și frecvența de apariție a lui în șirul de 
+// caractere pe câte o linie fiecare pereche cuvânt-frecvență ordonate lexicografic.
+
+void problema24() {
+	char s[255] = "";
+	cout << "Introduceti sirul :\n";
+	cin.getline(s, 255);
+	char cuvinte[200][200];
+	int d;
+	split(s, cuvinte, d);
+
+	rezolvarePb24(cuvinte, d);
+}
+
+// Problema 25

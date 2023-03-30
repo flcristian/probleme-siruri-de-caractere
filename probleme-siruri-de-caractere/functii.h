@@ -40,6 +40,15 @@ bool contineDoarConsoaneSauI(char s[]) {
 	return 1;
 }
 
+bool contineDoarVocale(char s[]) {
+	for (int i = 0; i < strlen(s); i++) {
+		if (!esteVocala(s[i])) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 bool estePalindrom(char s[]) {
 	char seg1[200] = "", seg2[200] = "";
 	int k = strlen(s) / 2;
@@ -54,6 +63,33 @@ bool estePalindrom(char s[]) {
 		}
 	}
 	return 1;
+}
+
+bool suntAnagrame(char cuv1[], char cuv2[]) {
+	_strlwr(cuv1), _strlwr(cuv2);
+	int f1[26]{}, f2[26]{};
+	for (int i = 0; i < strlen(cuv1); i++) {
+		f1[cuv1[i] - 97]++;
+	}
+	for (int j = 0; j < strlen(cuv2); j++) {
+		f2[cuv2[j] - 97]++;
+	}
+
+	for (int i = 0; i < 26; i++) {
+		if (f1[i] != f2[i]) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int apare(char cuvinte[200][200], int d, char cuvant[]) {
+	for (int i = 0; i < d; i++) {
+		if (strcmp(cuvinte[i], cuvant) == 0) {
+			return i;
+		}
+	}
+	return 0;
 }
 
 // Utility
@@ -165,6 +201,55 @@ int posUltimaConsoana(char cuvant[]) {
 	return -1;
 }
 
+void sablonDouaCuvinte(char cuv1[], char cuv2[], char sablon[]) {
+	char r[3] = "";
+	for (int i = 0; i < strlen(cuv1); i++) {
+		if (esteVocala(cuv1[i]) && esteVocala(cuv2[i])) {
+			r[0] = '*';
+		}
+		else if (esteConsoana(cuv1[i]) && esteConsoana(cuv2[i])) {
+			r[0] = '#';
+		}
+		else {
+			r[0] = '?';
+		}
+		strcat(sablon, r);
+	}
+}
+
+void frecventaLitere(char s[], int f[]) {
+	_strlwr(s);
+	for (int i = 0; i < strlen(s); i++) {
+		f[s[i] - 97]++;
+	}
+}
+
+void frecventaCifre(char s[], int f[]) {
+	for (int i = 0; i < strlen(s); i++) {
+		if (s[i] > 47 && s[i] < 58) {
+			f[s[i] - 48]++;
+		}
+	}
+}
+
+void bubbleSortCuFrecventa(char cuvinte[200][200], int d, int f[]) {
+	bool flag = true;
+	do {
+		flag = true;
+		for (int i = 0; i < d - 1; i++) {
+			if (strcmp(cuvinte[i], cuvinte[i + 1]) == 1) {
+				char r[200] = "", c = f[i];
+				strcpy(r, cuvinte[i]);
+				strcpy(cuvinte[i], cuvinte[i + 1]);
+				f[i] = f[i + 1];
+				strcpy(cuvinte[i + 1], r);
+				f[i + 1] = c;
+				flag = false;
+			}
+		}
+	} while (flag == false);
+}
+
 // Modifiers
 
 void inserare(char sir[], int k, char c) {
@@ -245,3 +330,96 @@ void capsLock(char sir[]) {
 		}
 	}
 }
+
+void stergereVocale(char sir[]) {
+	for (int i = 0; i < strlen(sir); i++) {
+		if (esteVocala(sir[i])) {
+			stergere(sir, i);
+			i--;
+		}
+	}
+}
+
+int countVocaleConsecutive(char s[]) {
+	int c = 0;
+	for (int i = 1; i < strlen(s); i++) {
+		if (esteVocala(s[i - 1]) && esteVocala(s[i])) {
+			c++;
+		}
+	}
+	return c;
+}
+
+// Rezolvari
+
+void rezolvarePb15(char prop[255][255], int d) {
+	int f[255]{};
+	for (int i = 0; i < d; i++) {
+		for (int j = 0; j < strlen(prop[i]); j++) {
+			if (esteVocala(prop[i][j])) {
+				f[i]++;
+			}
+		}
+	}
+
+	int max = 0, r = 0;
+	for (int i = 0; i < d; i++) {
+		if (f[i] > max) {
+			max = f[i];
+			r = i;
+		}
+	}
+
+	cout << prop[r] << endl;
+}
+
+void rezolvarePb19(char nume[], char prenume[], char rezultat[]) {
+	char r[3] = "";
+	for (int i = 0; i < strlen(prenume); i++) {
+		if (esteConsoana(prenume[i])) {
+			r[0] = prenume[i];
+			strcat(rezultat, r);
+		}
+	}
+	r[0] = ' ';
+	strcat(rezultat, r);
+	strcat(rezultat, nume);
+}
+
+void rezolvarePb23(char cuvinte[200][200], int d) {
+	int c = 0;
+	for (int i = 0; i < d; i++) {
+		if (contineDoarVocale(cuvinte[i])) {
+			c++;
+		}
+	}
+	cout << c << " cuvinte contin doar vocale.";
+}
+
+void rezolvarePb24(char cuvinte[200][200], int d) {
+	char cuvinteUnice[200][200];
+	int f[200]{}, n = 0;
+
+	for (int i = 0; i < d; i++) {
+		int k = apare(cuvinteUnice, n, cuvinte[i]);
+		if (k != 0) {
+			f[k]++;
+		}
+		else {
+			cout << cuvinte[i] << endl;
+			strcpy(cuvinteUnice[n], cuvinte[i]);
+			f[n]++;
+			n++;
+		}
+	}
+
+	bubbleSortCuFrecventa(cuvinteUnice, n, f);
+
+	for (int i = 0; i < n; i++) {
+		cout << cuvinteUnice[i] << " " << f[i] << endl;
+	}
+}
+
+// ? ? ? ? ? ? ? ? ? ^^^^^^
+
+
